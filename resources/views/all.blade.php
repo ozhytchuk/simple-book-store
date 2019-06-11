@@ -1,8 +1,6 @@
 @extends('main')
 @section('content')
-    @php
-        $num_pages = ceil($countBooks / 5);
-    @endphp
+    @empty(\Illuminate\Support\Facades\Input::get())
     <div class="sort-items">
         <div class="for-sort-items">
             <div class="sort-tags">Sort by:</div>
@@ -31,44 +29,59 @@
             </div>
         </div>
     </div>
-    @foreach($books as $book)
+    @endempty
+    @isset($q)
+    <div class="sort-items">
+        <div class="for-sort-items" id="search-by-tag">
+            <div class="sort-tags">Results for:</div>
+            <div>
+                <span class="badge badge-warning" id="find-name">{{ $q }}</span>
+            </div>
+        </div>
+    </div>
+    @endisset
+    @forelse($books as $book)
         <div class="book-item">
             <div class="poster">
-                <a href="{{ route('books_by_id', ['id' => $book['id']]) }}">
-                    <img src="{{ $book['poster'] }}" alt="{{ $book['title'] }}" class="media-object">
+                <a href="{{ route('books_by_id', $book) }}">
+                    <img src="{{ $book->poster }}" alt="{{ $book->title }}" class="media-object">
                 </a>
             </div>
             <div>
                 <h4 class="book-title">
-                    <a href="{{ route('books_by_id', ['id' => $book['id']]) }}">{{ $book['title'] }}</a>
+                    <a href="{{ route('books_by_id', $book) }}">
+                        {{ $book->title }}
+                    </a>
                 </h4>
                 <p>
-                    <b>Author</b>: {{ $book['author'] }}
+                    <b>Author</b>: {{ $book->author }}
                 </p>
                 <p>
-                    <b>Price</b>: <span style="color: #3c763d;">{{ $book['price'] }} $</span>
+                    <b>Price</b>: <span style="color: #3c763d;">{{ $book->price }} $</span>
                 </p>
                 @php
-                    $date = explode(' ', $book['book_date']);
+                    $date = explode(' ', $book->book_date);
                 @endphp
                 <p>
                     <b>Date</b>: {{ $date[0] }}
                 </p>
                 <p>
                     <b>Tags</b>:
-                    @foreach ($book['find_tags'] as $find_tags)
-                        <span class="badge badge-pill badge-success">{{ $find_tags['tag'] }}</span>
+                    @foreach ($book->findTags as $findTag)
+                        <span class="badge badge-pill badge-success">{{ $findTag->tag }}</span>
                     @endforeach
                 </p>
-                <a href="{{ route('books_by_id', ['id' => $book['id']]) }}" class="btn btn-primary">Details</a>
+                <a href="{{ route('books_by_id', $book) }}" class="btn btn-primary">Details</a>
             </div>
         </div>
-    @endforeach
+        @empty
+        <div class="alert alert-warning">
+            No results.
+        </div>
+    @endforelse
     <div class="pag">
         <div class="pagination-page">
-            <?php for ($page = 1; $page <= $num_pages; $page++) : ?>
-            <a class="page-link" href='?page=<?= $page ?>'><?= $page ?></a>
-            <?php endfor; ?>
+            {{ $books->links() }}
         </div>
     </div>
 @endsection

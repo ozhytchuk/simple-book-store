@@ -9,38 +9,23 @@ class Book extends Model
     const BOOKS_PER_PAGE = 5;
     protected $table = 'books';
 
-    public function allBooks($currentPage)
+    /*public function allBooks()
     {
-        return Book::with('findTags')->get()->forPage($currentPage, self::BOOKS_PER_PAGE)->toArray();
-    }
+        return Book::with('findTags')->paginate(self::BOOKS_PER_PAGE);
+    }*/
 
-    public function booksById($id)
+    public function sortBooks($param)
     {
-        return Book::all()->find($id);
-    }
-
-    public function sortBooks($param, $currentPage)
-    {
-        return Book::with('findTags')->get()->sortBy($param)->forPage($currentPage, self::BOOKS_PER_PAGE)->toArray();
+        return Book::with('findTags')->orderBy($param)->paginate(self::BOOKS_PER_PAGE);
     }
 
     public function searchWord($q)
     {
-        return Book::query()->with('findTags')->where('title', 'LIKE', "%$q%")->get()->toArray();
-    }
-
-    public function tags()
-    {
-        return $this->hasMany(Tag::class);
+        return Book::query()->with('findTags')->where('title', 'LIKE', "%$q%")->paginate(self::BOOKS_PER_PAGE);
     }
 
     public function findTags()
     {
         return $this->belongsToMany(Tag::class, 'tags_books');
-    }
-
-    public function countRows()
-    {
-        return Book::all()->count();
     }
 }

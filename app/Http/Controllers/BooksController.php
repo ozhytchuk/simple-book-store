@@ -8,47 +8,40 @@ use Illuminate\Http\Request;
 
 class BooksController extends Controller
 {
-    public function index(Request $request)
-    {
-        $book = new Book();
-        $tags = new Tag();
-        $currentPage = $request->get('page', 1);
+    const BOOKS_PER_PAGE = 3;
 
+    public function index()
+    {
         return view(
             'all',
             [
-                'books' => $book->allBooks($currentPage),
-                'allTags' => $tags->allTags(),
-                'countBooks' => $book->countRows()
+                'books' => Book::with('findTags')->paginate(self::BOOKS_PER_PAGE),
+                'allTags' => Tag::all(),
             ]
         );
     }
 
     public function show($id)
     {
-        $book = new Book();
-
         return view(
             'books_by_id',
             [
-                'book' => $book->booksById($id),
+                'book' => Book::find($id),
                 'tags' => Book::find($id)->findTags->toArray(),
             ]
         );
     }
 
-    public function sort(Request $request, $param)
+    public function sort($param)
     {
         $books = new Book();
         $tags = new Tag();
-        $currentPage = $request->get('page', 1);
 
         return view(
             'all',
             [
-                'books' => $books->sortBooks($param, $currentPage),
+                'books' => $books->sortBooks($param),
                 'allTags' => $tags->allTags(),
-                'countBooks' => $books->countRows()
             ]
         );
     }
@@ -60,7 +53,7 @@ class BooksController extends Controller
         $q = $request->input('q');
 
         return view(
-            'search_by_word',
+            'all',
             [
                 'books' => $books->searchWord($q),
                 'allTags' => $tags->allTags(),
