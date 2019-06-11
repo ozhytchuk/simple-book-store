@@ -13,7 +13,7 @@ class BooksController extends Controller
     public function index()
     {
         return view(
-            'all',
+            'pages.home',
             [
                 'books' => Book::with('findTags')->paginate(self::BOOKS_PER_PAGE),
                 'allTags' => Tag::all(),
@@ -24,7 +24,7 @@ class BooksController extends Controller
     public function show($id)
     {
         return view(
-            'books_by_id',
+            'pages.show',
             [
                 'book' => Book::find($id),
                 'tags' => Book::find($id)->findTags->toArray(),
@@ -35,13 +35,13 @@ class BooksController extends Controller
     public function sort($param)
     {
         $books = new Book();
-        $tags = new Tag();
 
         return view(
-            'all',
+            'pages.sort',
             [
                 'books' => $books->sortBooks($param),
-                'allTags' => $tags->allTags(),
+                'allTags' => Tag::all(),
+                'parameter' => $param,
             ]
         );
     }
@@ -49,14 +49,13 @@ class BooksController extends Controller
     public function search(Request $request)
     {
         $books = new Book();
-        $tags = new Tag();
         $q = $request->input('q');
 
         return view(
-            'all',
+            'pages.search',
             [
                 'books' => $books->searchWord($q),
-                'allTags' => $tags->allTags(),
+                'allTags' => Tag::all(),
                 'q' => $q
             ]
         );

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'BooksController@index')->name('books');
+Route::get('/', 'BooksController@index')->name('home');
 Route::get('/books/{book}', 'BooksController@show')->name('books_by_id');
 Route::get('/sort/{param}', 'BooksController@sort')->name('sort_by');
 Route::get('/search', 'BooksController@search')->name('search');

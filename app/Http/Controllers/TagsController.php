@@ -10,6 +10,6 @@ class TagsController extends Controller
     {
         $tags = new Tag();
 
-        return view('search_by_tag', ['books' => $tags->findBooksByTags($id)]);
+        return view('pages.search_tag', ['books' => $tags->findBooksByTags($id)]);
     }
 }

@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
     const BOOKS_PER_PAGE = 5;
-    protected $table = 'books';
 
     /*public function allBooks()
     {
