@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
+    const BOOKS_PER_PAGE = 5;
     protected $table = 'books';
-    public $booksPerPage = 5;
 
     public function allBooks($currentPage)
     {
-        return Book::with('findTags')->get()->forPage($currentPage, $this->booksPerPage)->toArray();
+        return Book::with('findTags')->get()->forPage($currentPage, self::BOOKS_PER_PAGE)->toArray();
     }
 
     public function booksById($id)
@@ -21,7 +21,7 @@ class Book extends Model
 
     public function sortBooks($param, $currentPage)
     {
-        return Book::with('findTags')->get()->sortBy($param)->forPage($currentPage, $this->booksPerPage)->toArray();
+        return Book::with('findTags')->get()->sortBy($param)->forPage($currentPage, self::BOOKS_PER_PAGE)->toArray();
     }
 
     public function searchWord($q)
