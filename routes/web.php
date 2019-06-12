@@ -18,3 +18,6 @@ Route::get('/books/{book}', 'BooksController@show')->name('books_by_id');
 Route::get('/sort/{param}', 'BooksController@sort')->name('sort_by');
 Route::get('/search', 'BooksController@search')->name('search');
 Route::get('/tags/{tag}', 'TagsController@show')->name('tags');
+
+Auth::routes();
+

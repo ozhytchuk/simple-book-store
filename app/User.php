@@ -34,6 +34,19 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
+        'id' => 'integer',
+        'name' => 'string',
+        'email' => 'string',
         'email_verified_at' => 'datetime',
+        'password' => 'string',
+        'is_admin' => 'boolean',
+        'remember_token' => 'string',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
     ];
 }
