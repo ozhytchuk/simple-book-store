@@ -26,8 +26,7 @@ class BooksController extends Controller
         return view(
             'pages.show',
             [
-                'book' => Book::find($id),
-                'tags' => Book::find($id)->findTags->toArray(),
+                'book' => Book::with('findTags')->find($id),
             ]
         );
     }

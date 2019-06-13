@@ -4,14 +4,22 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @method static find(Book $id)
+ */
 class Book extends Model
 {
     const BOOKS_PER_PAGE = 5;
 
-    /*public function allBooks()
-    {
-        return Book::with('findTags')->paginate(self::BOOKS_PER_PAGE);
-    }*/
+    protected $fillable = [
+      'title', 'author', 'description', 'poster', 'url', 'price', 'book_date'
+    ];
+
+    protected $dates = [
+        'book_date',
+        'created_at',
+        'updated_at',
+    ];
 
     public function sortBooks($param)
     {

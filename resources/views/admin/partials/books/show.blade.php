@@ -1,10 +1,5 @@
 @if (isset($book))
-    <ol class="my-breadcrumb">
-        <li>
-            <a href="{{ route('home') }}">Books</a>
-        </li>
-        <li class="active-book"> / {{ $book->title }}</li>
-    </ol>
+    <h2>{{ $book->title }}</h2>
     <div class="book-item">
         <div class="poster">
             <img src="{{ $book->poster }}" alt="" class="media-object">

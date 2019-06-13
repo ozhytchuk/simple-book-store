@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
     <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
+<style>
+    body {
+        padding: 0;
+    }
+</style>
 <body class="@yield('page_name')_page">
 <header>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
