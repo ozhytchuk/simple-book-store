@@ -10,6 +10,9 @@ class BooksController extends Controller
 {
     const BOOKS_PER_PAGE = 3;
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         return view(
@@ -21,6 +24,10 @@ class BooksController extends Controller
         );
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show($id)
     {
         return view(
@@ -31,29 +38,35 @@ class BooksController extends Controller
         );
     }
 
+    /**
+     * @param $param
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function sort($param)
     {
-        $books = new Book();
-
         return view(
             'pages.sort',
             [
-                'books' => $books->sortBooks($param),
+                'books' => Book::with('findTags')->orderBy($param)->paginate(self::BOOKS_PER_PAGE),
                 'allTags' => Tag::all(),
                 'parameter' => $param,
             ]
         );
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function search(Request $request)
     {
-        $books = new Book();
         $q = $request->input('q');
 
         return view(
             'pages.search',
             [
-                'books' => $books->searchWord($q),
+                'books' => Book::query()->with('findTags')->where('title', 'LIKE',
+                    "%$q%")->paginate(self::BOOKS_PER_PAGE),
                 'allTags' => Tag::all(),
                 'q' => $q
             ]
