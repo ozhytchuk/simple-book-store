@@ -8,6 +8,7 @@ class Book extends Model
 {
     const BOOKS_PER_PAGE = 5;
 
+
     protected $fillable = [
       'title', 'author', 'description', 'poster', 'url', 'price', 'book_date'
     ];

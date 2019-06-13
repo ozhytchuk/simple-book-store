@@ -1,4 +1,4 @@
-@if (isset($book))
+@forelse($books as $book)
     <h2>{{ $book->title }}</h2>
     <div class="book-item">
         <div class="poster">
@@ -31,8 +31,13 @@
             <p>{!! $book->description !!}</p>
         </div>
     </div>
-@else
+    <form action="{{ route('admin.destroy', ['book' => $book->id]) }}" method="post">
+        @csrf
+        @method('DELETE')
+        <input type="submit" value="Delete">
+    </form>
+@empty
     <div class="alert alert-warning">
         No results.
     </div>
-@endif
+@endforelse

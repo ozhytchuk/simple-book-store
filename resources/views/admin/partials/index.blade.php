@@ -16,7 +16,7 @@
         @foreach($books as $book)
             <tr>
                 <td>{{ $book->id }}</td>
-                <td><a href="{{ route('show-book', ['id' => $book->id]) }}">{{ $book->title }}</a></td>
+                <td><a href="{{ route('admin.show', ['book' => $book->id]) }}">{{ $book->title }}</a></td>
                 <td>{{ $book->author }}</td>
                 <td>{{ $book->poster }}</td>
                 <td>{{ $book->price }}</td>
@@ -24,16 +24,17 @@
                     <td>{{ $findTag->tag }}</td>
                 @endforeach
                 <td>
-                    <a href="{{ route('edit-book', ['id' => $book->id]) }}"><i class="fas fa-edit"></i></a>
-                    <a href="{{ route('delete-book', ['id' => $book->id]) }}"><i class="fas fa-trash" id="edit-icon"></i></a>
-                </td>
-            </tr>
+                    <a href="{{ route('admin.edit', ['book' => $book->id]) }}"><i
+                                class="fas fa-edit"></i>
+                    </a>
+
+
         @endforeach
 
         </tbody>
     </table>
     <div class="new-book">
-        <a href="{{ route('add-book') }}" class="btn btn-success" style="float: right">Add new book</a>
+        <a href="{{ route('admin.create') }}" class="btn btn-success" style="float: right">Add new book</a>
     </div>
     <br/>
     <div class="pag">

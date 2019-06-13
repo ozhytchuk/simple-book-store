@@ -21,9 +21,12 @@ Route::get('/tags/{tag}', 'TagsController@show')->name('tags');
 
 Auth::routes();
 
-Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
+Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'admin'], function () {
-        Route::get('/', 'Admin\AdminController@dashboard')->name('admin');
+        Route::resource('admin', 'Admin\AdminController')->parameters([
+            'admin' => 'book'
+        ]);
+        /*Route::get('/', 'Admin\AdminController@dashboard')->name('admin');
 
         Route::get('/books/add', 'Admin\AdminController@addBook')->name('add-book');
         Route::post('/books/add', 'Admin\AdminController@addBookRequest');
@@ -33,6 +36,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
         Route::get('/books/edit/{id}', 'Admin\AdminController@editBook')->name('edit-book');
         Route::post('/books/edit/{id}', 'Admin\AdminController@editBookRequest');
 
-        Route::get('/delete-book/{id}', 'Admin\AdminController@deleteBook')->name('delete-book');
+        Route::get('/delete-book/{id}', 'Admin\AdminController@deleteBook')->name('delete-book');*/
     });
 });
