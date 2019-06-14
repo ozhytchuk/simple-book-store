@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,16 +27,5 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('admin', 'Admin\AdminController')->parameters([
             'admin' => 'book'
         ]);
-        /*Route::get('/', 'Admin\AdminController@dashboard')->name('admin');
-
-        Route::get('/books/add', 'Admin\AdminController@addBook')->name('add-book');
-        Route::post('/books/add', 'Admin\AdminController@addBookRequest');
-
-        Route::get('/books/{id}', 'Admin\AdminController@show')->name('show-book');
-
-        Route::get('/books/edit/{id}', 'Admin\AdminController@editBook')->name('edit-book');
-        Route::post('/books/edit/{id}', 'Admin\AdminController@editBookRequest');
-
-        Route::get('/delete-book/{id}', 'Admin\AdminController@deleteBook')->name('delete-book');*/
     });
 });

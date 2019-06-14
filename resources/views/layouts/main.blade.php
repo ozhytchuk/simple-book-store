@@ -53,9 +53,17 @@
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }} <span class="caret"></span>
+<!--                                --><?php //dd(Auth::user()->is_admin); ?>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                @if (Auth::user()->is_admin)
+                                    <a class="dropdown-item" href="{{ route('admin.index') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('admin-page-form').submit();">
+                                        {{ __('Admin panel') }}
+                                    </a>
+                                @endif
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -63,6 +71,10 @@
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                      style="display: none;">
+                                    @csrf
+                                </form>
+                                <form id="admin-page-form" action="{{ route('admin.index') }}"
                                       style="display: none;">
                                     @csrf
                                 </form>
