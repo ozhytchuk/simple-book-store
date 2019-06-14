@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
-    const BOOKS_PER_PAGE = 3;
+    const TAGS_PER_PAGE = 3;
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -23,6 +23,6 @@ class Tag extends Model
      */
     public function findBooksByTags(Tag $tag)
     {
-        return Tag::with('findTags')->where('id', '=', $tag)->paginate(self::BOOKS_PER_PAGE);
+        return Tag::with('findTags')->where('id', '=', $tag)->paginate(self::TAGS_PER_PAGE);
     }
 }
