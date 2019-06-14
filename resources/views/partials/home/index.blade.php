@@ -1,7 +1,7 @@
 @forelse($books as $book)
     <div class="book-item">
         <div class="poster">
-            <a href="{{ route('books.by_id', $book) }}">
+            <a href="{{ route('books.by_id', ['book' => $book->id]) }}">
                 <img src="{{ $book->poster }}" alt="{{ $book->title }}" class="media-object">
             </a>
         </div>

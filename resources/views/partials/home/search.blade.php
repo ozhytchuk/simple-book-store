@@ -20,7 +20,7 @@
         <div class="sort-tags">Select a tag:</div>
         <div>
             @foreach($allTags as $tags)
-                <a href="{{ route('books.tags', ['tag_id' => $tags->id]) }}" class="badge badge-info"
+                <a href="{{ route('books.tags', ['tag' => $tags->id]) }}" class="badge badge-info"
                    id="find-tag">{{ $tags->tag }}</a>
             @endforeach
         </div>

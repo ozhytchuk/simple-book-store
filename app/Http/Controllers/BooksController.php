@@ -28,12 +28,12 @@ class BooksController extends Controller
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show($id)
+    public function show(Book $book)
     {
         return view(
             'pages.show',
             [
-                'book' => Book::with('findTags')->find($id),
+                'book' => Book::with('findTags')->find($book->getAttribute('id')),
             ]
         );
     }
