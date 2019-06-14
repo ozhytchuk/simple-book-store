@@ -29,7 +29,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
-                    <form action="{{ route('search') }}" class="form-inline" method="get">
+                    <form action="{{ route('books.search') }}" class="form-inline" method="get">
                         <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"
                                name="q"
                                id="search" required>

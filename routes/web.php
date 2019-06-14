@@ -14,11 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'BooksController@index')->name('home');
-Route::get('/books/{book}', 'BooksController@show')->name('books_by_id');
-Route::get('/sort/{param}', 'BooksController@sort')->name('sort_by');
-Route::get('/search', 'BooksController@search')->name('search');
-Route::get('/tags/{tag}', 'TagsController@show')->name('tags');
+Route::get('/', 'BooksController@index')->name('books.index');
+Route::get('/books/{book}', 'BooksController@show')->name('books.by_id');
+Route::get('/sort/{param}', 'BooksController@sort')->name('books.sort');
+Route::get('/search', 'BooksController@search')->name('books.search');
+Route::get('/tags/{tag}', 'TagsController@show')->name('books.tags');
 
 Auth::routes();
 

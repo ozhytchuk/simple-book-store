@@ -1,7 +1,7 @@
 @if (isset($book))
     <ol class="my-breadcrumb">
         <li>
-            <a href="{{ route('home') }}">Books</a>
+            <a href="{{ route('books.index') }}">Books</a>
         </li>
         <li class="active-book"> / {{ $book->title }}</li>
     </ol>
