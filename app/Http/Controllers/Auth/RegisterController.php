@@ -58,7 +58,7 @@ class RegisterController extends Controller
         $this->guard()->login($user);
 
         return $this->registered($request, $user)
-            ?: redirect(route('home'))->with('success', "Hello, $username. You have Successfully Registered");
+            ?: redirect(route('site.index'))->with('success', "Hello, $username. You have Successfully Registered");
     }
 
     /**

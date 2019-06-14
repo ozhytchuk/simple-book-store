@@ -14,18 +14,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'BooksController@index')->name('books.index');
-Route::get('/books/{book}', 'BooksController@show')->name('books.by_id');
-Route::get('/sort/{param}', 'BooksController@sort')->name('books.sort');
-Route::get('/search', 'BooksController@search')->name('books.search');
-Route::get('/tags/{tag}', 'TagsController@show')->name('books.tags');
+Route::get('/', 'BooksController@index')->name('site.index');
+Route::get('/books/{book}', 'BooksController@show')->name('site.by_id');
+Route::get('/sort/{param}', 'BooksController@sort')->name('site.sort');
+Route::get('/search', 'BooksController@search')->name('site.search');
+Route::get('/tags/{tag}', 'TagsController@show')->name('site.tags');
 
 Auth::routes();
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::group(['middleware' => 'admin'], function () {
-        Route::resource('admin', 'Admin\AdminController')->parameters([
-            'admin' => 'book'
-        ]);
+Route::prefix('admin')->group(function () {
+    Route::group(['middleware' => 'auth'], function () {
+        Route::group(['middleware' => 'admin'], function () {
+            Route::resource('books', 'Admin\BookController')->parameters([
+                'books' => 'book'
+            ]);
+            Route::resource('tags', 'Admin\TagController')->parameters([
+                'tags' => 'tag'
+            ]);
+        });
     });
 });

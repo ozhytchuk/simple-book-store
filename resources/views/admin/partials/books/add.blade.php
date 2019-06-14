@@ -1,6 +1,6 @@
 <h2>Add book</h2>
 <div class="container">
-    <form action="{{ route('admin.store') }}" method="post">
+    <form action="{{ route('books.store') }}" method="post">
         @csrf
         <div class="form-group">
             <label for="title">Title</label>
@@ -26,6 +26,11 @@
         <div class="form-group">
             <label for="price">Price</label>
             <input id="price" type="text" class="form-control" name="price">
+        </div>
+        <div class="form-group">
+            <label for="book_date">Date</label>
+            <input id="book_date" type="text" class="form-control" name="book_date" value="{{ date('Y-m-d H:i:s') }}"
+                   readonly>
         </div>
 
         <button class="btn btn-success" style="cursor: pointer; float: right; margin-bottom: 2%;">

@@ -18,7 +18,7 @@ class BooksController extends Controller
         return view(
             'pages.home',
             [
-                'books' => Book::with('findTags')->paginate(self::BOOKS_PER_PAGE),
+                'books' => Book::with('findTags')->orderBy('created_at', 'desc')->paginate(self::BOOKS_PER_PAGE),
                 'allTags' => Tag::all(),
             ]
         );

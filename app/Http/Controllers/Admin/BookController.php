@@ -6,7 +6,7 @@ use App\Book;
 use App\Http\Requests\BookRequest;
 use App\Http\Controllers\Controller;
 
-class AdminController extends Controller
+class BookController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.pages.dashboard', ['books' => Book::with('findTags')->paginate(5)]);
+        return view('admin.pages.dashboard',
+            ['books' => Book::with('findTags')->orderBy('created_at', 'desc')->paginate(5)]);
     }
 
     /**
@@ -34,9 +35,10 @@ class AdminController extends Controller
      */
     public function store(BookRequest $request)
     {
-        Book::create($request->all());
+        $book = Book::create($request->all());
 
-        return redirect(route('admin.index'))->with('success', 'Book has been successfully added');
+        return redirect(route('books.show', ['book' => $book->id]))->with('success',
+            'Book has been successfully added');
     }
 
     /**
@@ -59,6 +61,7 @@ class AdminController extends Controller
     public function edit(Book $book)
     {
         $books = Book::find($book);
+
         if (!$books) {
             return abort(404);
         }
@@ -81,9 +84,10 @@ class AdminController extends Controller
             return back()->with('error', 'Something went wrong');
         }
 
-        $request->all()->save();
+        $books->fill($request->all());
+        $books->save();
 
-        return redirect(route('admin.index'))->with('success', 'Changes have been successfully saved');
+        return redirect(route('books.index'))->with('success', 'Changes have been successfully saved');
     }
 
     /**
@@ -98,6 +102,6 @@ class AdminController extends Controller
 
         $books->delete();
 
-        return redirect(route('admin.index'))->with('success', 'Book has been successfully deleted');
+        return redirect(route('books.index'))->with('success', 'Book has been successfully deleted');
     }
 }

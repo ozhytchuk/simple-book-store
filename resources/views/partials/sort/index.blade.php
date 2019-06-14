@@ -1,13 +1,13 @@
 @forelse($books as $book)
     <div class="book-item">
         <div class="poster">
-            <a href="{{ route('books.by_id', $book) }}">
+            <a href="{{ route('site.by_id', $book) }}">
                 <img src="{{ $book->poster }}" alt="{{ $book->title }}" class="media-object">
             </a>
         </div>
         <div>
             <h4 class="book-title">
-                <a href="{{ route('books.by_id', $book) }}">
+                <a href="{{ route('site.by_id', $book) }}">
                     {{ $book->title }}
                 </a>
             </h4>
@@ -29,7 +29,7 @@
                     <span class="badge badge-pill badge-success">{{ $findTag->tag }}</span>
                 @endforeach
             </p>
-            <a href="{{ route('books.by_id', $book) }}" class="btn btn-primary">Details</a>
+            <a href="{{ route('site.by_id', $book) }}" class="btn btn-primary">Details</a>
         </div>
     </div>
 @empty

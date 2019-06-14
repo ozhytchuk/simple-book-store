@@ -9,6 +9,18 @@ class Tag extends Model
     const TAGS_PER_PAGE = 3;
 
     /**
+     * @var array
+     */
+    protected $fillable = [
+        'tag',
+    ];
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+    ];
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      *
      */

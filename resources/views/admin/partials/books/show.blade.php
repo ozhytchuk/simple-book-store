@@ -24,18 +24,16 @@
             </p>
             <p>
                 <b>Tags</b>:
-                @foreach($book->findTags as $tag)
+                @forelse($book->findTags as $tag)
                     <span class="badge badge-pill badge-warning">{{ $tag->tag }}</span>
-                @endforeach
+                @empty
+                    <span class="badge badge-pill badge-danger">NO DATA</span>
+                @endforelse
             </p>
             <p>{!! $book->description !!}</p>
         </div>
     </div>
-    <form action="{{ route('admin.destroy', ['book' => $book->id]) }}" method="post">
-        @csrf
-        @method('DELETE')
-        <input type="submit" value="Delete">
-    </form>
+    <a href="{{ route('books.index') }}" class="btn btn-outline-primary back-to-site">Back</a>
 @empty
     <div class="alert alert-warning">
         No results.

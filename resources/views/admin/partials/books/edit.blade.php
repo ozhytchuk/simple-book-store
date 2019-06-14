@@ -1,7 +1,7 @@
 @forelse($books as $book)
     <h2>Edit information</h2>
     <div class="container">
-        <form action="{{ route('admin.update', ['book' => $book->id]) }}" method="post">
+        <form action="{{ route('books.update', ['book' => $book->id]) }}" method="post">
             @method('PUT')
             @csrf
             <div class="form-group">
@@ -32,8 +32,18 @@
                 <input id="price" type="text" class="form-control" name="price" value="{{ $book->price }}">
             </div>
             <div class="form-group">
-                <label for="date">Date</label>
-                <input id="date" type="text" class="form-control" name="date" value="{{ $book->book_date }}">
+                <label for="book_date">Date</label>
+                <input id="book_date" type="text" class="form-control" name="book_date" value="{{ $book->book_date }}"
+                >
+            </div>
+            <div class="form-group">
+                <label for="test">Date</label>
+                <select class="form-control" name="test">
+                    <option>Default select</option>
+                    <option>Default select</option>
+                    <option>Default select</option>
+                    <option>Default select</option>
+                </select>
             </div>
             <button class="btn btn-success" style="cursor: pointer; float: right; margin-bottom: 2%;">
                 Edit

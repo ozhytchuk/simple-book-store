@@ -29,7 +29,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
-                    <form action="{{ route('books.search') }}" class="form-inline" method="get">
+                    <form action="{{ route('site.search') }}" class="form-inline" method="get">
                         <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"
                                name="q"
                                id="search" required>
@@ -58,9 +58,7 @@
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 @if (Auth::user()->is_admin)
-                                    <a class="dropdown-item" href="{{ route('admin.index') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('admin-page-form').submit();">
+                                    <a class="dropdown-item" href="{{ route('books.index') }}">
                                         {{ __('Admin panel') }}
                                     </a>
                                 @endif
@@ -71,10 +69,6 @@
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                      style="display: none;">
-                                    @csrf
-                                </form>
-                                <form id="admin-page-form" action="{{ route('admin.index') }}"
                                       style="display: none;">
                                     @csrf
                                 </form>

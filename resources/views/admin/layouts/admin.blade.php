@@ -10,7 +10,7 @@
 </head>
 <body>
 <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
-    <a class="navbar-brand" href="{{ route('admin.index') }}">Dashboard</a>
+    <a class="navbar-brand" href="{{ route('books.index') }}">Dashboard</a>
 </nav>
 
 <div class="container-fluid">
@@ -18,18 +18,16 @@
         <nav class="col-md-2 hidden-xs-down bg-faded sidebar">
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.index') }}">Books</a>
+                    <a class="nav-link" href="{{ route('books.index') }}">Books</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Users</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Tags</a>
+                    <a class="nav-link" href="{{ route('tags.index') }}">Tags</a>
                 </li>
             </ul>
-
         </nav>
-
         <main class="col-md-10 sidebar">
             @yield('content')
         </main>
